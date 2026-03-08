@@ -13,8 +13,17 @@ const allServices = [
   { icon: <ShieldCheck className="h-7 w-7" />, label: "Safety", desc: "Emergency help", color: "bg-uber-surge/15 text-uber-surge" },
   { icon: <Users className="h-7 w-7" />, label: "Group Ride", desc: "Split fares", color: "bg-uber-yellow/15 text-uber-yellow" },
 ];
+// Route map for services that have dedicated pages
+const serviceRoutes: Record<string, string> = {
+  Ride: "/book",
+  Package: "/package",
+  Eats: "/eats",
+  Reserve: "/reserve",
+  Safety: "/safety",
+};
 
 const Services = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background pb-20">
       <SideMenu />
