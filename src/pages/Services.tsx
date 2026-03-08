@@ -17,7 +17,8 @@ const allServices = [
 const Services = () => {
   return (
     <div className="min-h-screen bg-background pb-20">
-      <div className="px-5 pt-12 pb-6">
+      <SideMenu />
+      <div className="px-5 pt-12 pb-6 pl-16">
         <h1 className="text-2xl font-bold text-foreground">Services</h1>
         <p className="text-sm text-muted-foreground">Explore what's available</p>
       </div>

@@ -15,7 +15,8 @@ const menuItems = [
 const Account = () => {
   return (
     <div className="min-h-screen bg-background pb-20">
-      <div className="px-5 pt-12 pb-6">
+      <SideMenu />
+      <div className="px-5 pt-12 pb-6 pl-16">
         {/* Profile header */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
