@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import Account from "./pages/Account";
 import PackageDrop from "./pages/PackageDrop";
 import Eats from "./pages/Eats";
+import Reserve from "./pages/Reserve";
 import NotFound from "./pages/NotFound";
 
 // Single query client instance for react-query caching
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/package" element={<PackageDrop />} />
           <Route path="/eats" element={<Eats />} />
+          <Route path="/reserve" element={<Reserve />} />
           <Route path="/account" element={<Account />} />
           {/* Catch-all for undefined routes */}
           <Route path="*" element={<NotFound />} />
