@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Car, Package, Utensils, Bike, Train, ShieldCheck, CalendarClock, Users } from "lucide-react";
-import BottomNav from "@/components/BottomNav";
+import SideMenu from "@/components/SideMenu";
 import SideMenu from "@/components/SideMenu";
 
 const allServices = [
