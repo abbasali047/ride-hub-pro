@@ -39,6 +39,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/package" element={<PackageDrop />} />
           <Route path="/eats" element={<Eats />} />
+          <Route path="/reserve" element={<Reserve />} />
           <Route path="/account" element={<Account />} />
           {/* Catch-all for undefined routes */}
           <Route path="*" element={<NotFound />} />
