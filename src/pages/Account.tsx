@@ -85,7 +85,7 @@ const Account = () => {
         </motion.button>
       </div>
 
-      <BottomNav />
+      
     </div>
   );
 };

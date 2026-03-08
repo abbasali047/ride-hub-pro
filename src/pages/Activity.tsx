@@ -47,7 +47,7 @@ const Activity = () => {
         ))}
       </div>
 
-      <BottomNav />
+      
     </div>
   );
 };

@@ -138,7 +138,7 @@ const Index = () => {
         </div>
       </motion.div>
 
-      <BottomNav />
+      
     </div>
   );
 };
