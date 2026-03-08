@@ -9,6 +9,7 @@ import RideTracking from "./pages/RideTracking";
 import Rating from "./pages/Rating";
 import Activity from "./pages/Activity";
 import Services from "./pages/Services";
+import Login from "./pages/Login";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 
