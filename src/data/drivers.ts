@@ -1,3 +1,6 @@
+// Driver data — all based in Jaipur with RJ 14 registration plates
+// Safety scores are out of 100, calculated from ride history and feedback
+
 export interface Driver {
   name: string;
   rating: number;
@@ -21,6 +24,7 @@ export const drivers: Driver[] = [
   { name: "Pramod Joshi", rating: 4.82, trips: 2050, car: "Honda City", plate: "RJ 14 ST 8901", safetyScore: 94, avatar: "🧓" },
 ];
 
+// Returns a random driver from the pool — used for ride matching simulation
 export const getRandomDriver = (): Driver => {
   return drivers[Math.floor(Math.random() * drivers.length)];
 };

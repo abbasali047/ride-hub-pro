@@ -4,11 +4,14 @@ import { motion } from "framer-motion";
 import { Search, Clock, Star, MapPin, Calendar, ChevronRight, Car, Package, Utensils } from "lucide-react";
 import SideMenu from "@/components/SideMenu";
 
+// Hardcoded saved places — later we can fetch these from user profile / localStorage
 const savedPlaces = [
   { icon: "🏠", label: "Home", address: "Vaishali Nagar, Jaipur" },
   { icon: "💼", label: "Work", address: "Malviya Nagar, Jaipur" },
 ];
 
+// Mock data for recent rides history
+// TODO: Replace with actual API call when backend is ready
 const recentRides = [
   { destination: "Jaipur International Airport", time: "Yesterday, 3:45 PM", price: "₹450" },
   { destination: "Hawa Mahal", time: "Mar 5, 11:20 AM", price: "₹120" },
@@ -16,6 +19,8 @@ const recentRides = [
   { destination: "World Trade Park", time: "Mar 1, 6:30 PM", price: "₹95" },
 ];
 
+// Main services offered on the home screen
+// Each service links to its own booking flow
 const services = [
   { icon: <Car className="h-6 w-6" />, label: "Ride", color: "bg-primary/15 text-primary" },
   { icon: <Package className="h-6 w-6" />, label: "Package", color: "bg-uber-green/15 text-uber-green" },
@@ -28,8 +33,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background pb-20">
+      {/* Side navigation drawer — hamburger menu in top-left */}
       <SideMenu />
-      {/* Header */}
+
+      {/* Greeting header — we could make this dynamic based on time of day */}
       <div className="px-5 pt-12 pb-6 pl-16">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-2xl font-bold text-foreground">Good evening</h1>
@@ -37,7 +44,7 @@ const Index = () => {
         </motion.div>
       </div>
 
-      {/* Search bar */}
+      {/* Search bar — tapping this takes user to the booking page */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -50,6 +57,7 @@ const Index = () => {
         >
           <Search className="h-5 w-5 text-muted-foreground" />
           <span className="text-sm text-muted-foreground">Where to?</span>
+          {/* "Now" pill — could be expanded to show scheduled time */}
           <div className="ml-auto flex items-center gap-2 rounded-full bg-secondary px-3 py-1.5">
             <Clock className="h-3.5 w-3.5 text-foreground" />
             <span className="text-xs font-medium text-foreground">Now</span>
@@ -57,7 +65,7 @@ const Index = () => {
         </button>
       </motion.div>
 
-      {/* Services */}
+      {/* Quick-access service grid */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -68,6 +76,7 @@ const Index = () => {
           {services.map((service) => (
             <button
               key={service.label}
+              // Navigate to the appropriate page based on service type
               onClick={() => service.label === "Ride" ? navigate("/book") : service.label === "Package" ? navigate("/package") : service.label === "Eats" ? navigate("/eats") : undefined}
               className="flex flex-col items-center gap-2"
             >
@@ -80,7 +89,7 @@ const Index = () => {
         </div>
       </motion.div>
 
-      {/* Saved Places */}
+      {/* Saved places section — home, work, etc. */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -109,7 +118,7 @@ const Index = () => {
         </div>
       </motion.div>
 
-      {/* Recent Rides */}
+      {/* Recent rides list — shows past trip history */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -131,6 +140,7 @@ const Index = () => {
                 <p className="text-sm font-medium text-foreground">{ride.destination}</p>
                 <p className="text-xs text-muted-foreground">{ride.time}</p>
               </div>
+              {/* Price shown on the right for quick reference */}
               <span className="text-sm font-semibold text-foreground">{ride.price}</span>
             </button>
           ))}

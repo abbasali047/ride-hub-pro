@@ -7,6 +7,8 @@ import MapPlaceholder from "@/components/MapPlaceholder";
 import VehicleCard from "@/components/VehicleCard";
 import MoodSelector from "@/components/MoodSelector";
 
+// Available vehicle types with pricing in INR
+// surge flag indicates dynamic pricing is active for that category
 const vehicles = [
   { name: "UberX", description: "Affordable everyday rides", price: "₹120", eta: "3 min", capacity: 4, icon: "🚗", surge: false },
   { name: "Comfort", description: "Newer cars, extra legroom", price: "₹185", eta: "5 min", capacity: 4, icon: "🚙", surge: false },
@@ -23,18 +25,20 @@ const BookRide = () => {
   const [scheduleMode, setScheduleMode] = useState(false);
   const [showVehicles, setShowVehicles] = useState(false);
 
+  // Show vehicle options once user starts typing a destination
   const handleDestinationChange = (val: string) => {
     setDestination(val);
     if (val.length > 2) setShowVehicles(true);
   };
 
+  // Navigate to ride tracking after booking is confirmed
   const handleBook = () => {
     navigate("/ride-tracking");
   };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      {/* Top bar with back navigation */}
       <div className="flex items-center gap-3 px-5 pt-12 pb-4">
         <button onClick={() => navigate(-1)} className="rounded-full bg-card p-2">
           <ArrowLeft className="h-5 w-5 text-foreground" />
@@ -43,8 +47,10 @@ const BookRide = () => {
       </div>
 
       <div className="px-5 space-y-4">
+        {/* Map preview — shows route when destination is entered */}
         <MapPlaceholder showRoute={showVehicles} />
 
+        {/* Pickup and destination input fields */}
         <LocationInput
           pickup={pickup}
           destination={destination}
@@ -52,7 +58,7 @@ const BookRide = () => {
           onDestinationChange={handleDestinationChange}
         />
 
-        {/* Schedule toggle */}
+        {/* Toggle between "Ride now" and "Schedule for later" */}
         <div className="flex gap-2">
           <button
             onClick={() => setScheduleMode(false)}
@@ -74,7 +80,7 @@ const BookRide = () => {
           </button>
         </div>
 
-        {/* Schedule picker */}
+        {/* Schedule time picker — only visible when "Schedule" mode is active */}
         <AnimatePresence>
           {scheduleMode && (
             <motion.div
@@ -85,6 +91,7 @@ const BookRide = () => {
             >
               <h3 className="mb-3 text-sm font-semibold text-foreground">Pick a time</h3>
               <div className="grid grid-cols-3 gap-2">
+                {/* Predefined time slots + custom option */}
                 {["Today 5:00 PM", "Today 6:00 PM", "Tomorrow 8:00 AM", "Tomorrow 9:00 AM", "Tomorrow 12:00 PM", "Custom"].map((time) => (
                   <button
                     key={time}
@@ -98,7 +105,7 @@ const BookRide = () => {
           )}
         </AnimatePresence>
 
-        {/* Vehicle selection */}
+        {/* Vehicle selection cards — appear after user types a destination */}
         <AnimatePresence>
           {showVehicles && (
             <motion.div
@@ -119,9 +126,10 @@ const BookRide = () => {
           )}
         </AnimatePresence>
 
+        {/* Mood preference selector (quiet, chat, music, AC) */}
         {showVehicles && <MoodSelector selected={mood} onSelect={setMood} />}
 
-        {/* Book button */}
+        {/* Confirm booking button — shows selected vehicle name and price */}
         {showVehicles && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}

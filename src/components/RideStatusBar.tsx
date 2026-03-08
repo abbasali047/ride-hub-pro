@@ -4,6 +4,8 @@ interface RideStatusBarProps {
   status: "searching" | "matched" | "arriving" | "in_ride" | "completed";
 }
 
+// Maps each ride stage to a label, progress percentage, and color
+// Colors use our custom theme tokens (uber-blue, uber-green, etc.)
 const statusConfig = {
   searching: { label: "Finding your driver...", progress: 20, color: "bg-primary" },
   matched: { label: "Driver is on the way", progress: 40, color: "bg-uber-blue" },
@@ -12,6 +14,10 @@ const statusConfig = {
   completed: { label: "Trip completed!", progress: 100, color: "bg-uber-green" },
 };
 
+/**
+ * Horizontal progress bar that shows current ride status.
+ * Animates smoothly between stages using framer-motion.
+ */
 const RideStatusBar = ({ status }: RideStatusBarProps) => {
   const config = statusConfig[status];
 
@@ -19,6 +25,7 @@ const RideStatusBar = ({ status }: RideStatusBarProps) => {
     <div className="rounded-xl bg-card p-4">
       <div className="flex items-center justify-between mb-2">
         <span className="text-sm font-semibold text-foreground">{config.label}</span>
+        {/* Spinning loader only during the "searching" phase */}
         {status === "searching" && (
           <motion.div
             animate={{ rotate: 360 }}
@@ -27,6 +34,7 @@ const RideStatusBar = ({ status }: RideStatusBarProps) => {
           />
         )}
       </div>
+      {/* Progress track */}
       <div className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
         <motion.div
           initial={{ width: 0 }}

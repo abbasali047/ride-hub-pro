@@ -13,6 +13,10 @@ interface VehicleCardProps {
   onSelect: () => void;
 }
 
+/**
+ * Selectable card for each vehicle type in the booking flow.
+ * Shows vehicle icon, name, capacity, ETA, price, and surge indicator.
+ */
 const VehicleCard = ({ name, description, price, eta, capacity, icon, selected, surge, onSelect }: VehicleCardProps) => {
   return (
     <motion.button
@@ -24,15 +28,18 @@ const VehicleCard = ({ name, description, price, eta, capacity, icon, selected, 
           : "bg-card border border-transparent hover:bg-secondary"
       }`}
     >
+      {/* Vehicle emoji icon */}
       <div className="text-4xl">{icon}</div>
       
       <div className="flex-1 text-left">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-foreground">{name}</span>
+          {/* Passenger capacity indicator */}
           <div className="flex items-center gap-1 text-muted-foreground">
             <Users className="h-3 w-3" />
             <span className="text-xs">{capacity}</span>
           </div>
+          {/* Surge pricing badge — only shown when demand is high */}
           {surge && (
             <div className="flex items-center gap-0.5 rounded-full bg-uber-surge/20 px-1.5 py-0.5">
               <Zap className="h-3 w-3 text-uber-surge" />
@@ -43,6 +50,7 @@ const VehicleCard = ({ name, description, price, eta, capacity, icon, selected, 
         <p className="text-xs text-muted-foreground">{eta} · {description}</p>
       </div>
 
+      {/* Price on the right */}
       <div className="text-right">
         <span className="font-bold text-foreground">{price}</span>
       </div>

@@ -9,30 +9,37 @@ import QuickChat from "@/components/QuickChat";
 import { useToast } from "@/hooks/use-toast";
 import { getRandomDriver } from "@/data/drivers";
 
+// Ride goes through these stages in order
 type RideStatus = "searching" | "matched" | "arriving" | "in_ride" | "completed";
 
 const RideTracking = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [status, setStatus] = useState<RideStatus>("searching");
+
+  // Pick a random driver once when component mounts (memoized so it doesn't change on re-renders)
   const driver = useMemo(() => getRandomDriver(), []);
 
+  // Simulate the ride lifecycle with timed status changes
+  // In production, this would be replaced by real-time websocket updates
   useEffect(() => {
     const timers = [
-      setTimeout(() => setStatus("matched"), 3000),
-      setTimeout(() => setStatus("arriving"), 7000),
-      setTimeout(() => setStatus("in_ride"), 11000),
-      setTimeout(() => setStatus("completed"), 18000),
+      setTimeout(() => setStatus("matched"), 3000),     // driver found after 3s
+      setTimeout(() => setStatus("arriving"), 7000),     // driver arriving after 7s
+      setTimeout(() => setStatus("in_ride"), 11000),     // ride starts after 11s
+      setTimeout(() => setStatus("completed"), 18000),   // ride ends after 18s
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
 
+  // Auto-navigate to rating screen once ride is completed
   useEffect(() => {
     if (status === "completed") {
       setTimeout(() => navigate("/rating"), 1500);
     }
   }, [status, navigate]);
 
+  // Handle quick chat messages — just shows a toast for now
   const handleQuickMessage = (msg: string) => {
     toast({
       title: "Message sent",
@@ -42,6 +49,7 @@ const RideTracking = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Header with back and close buttons */}
       <div className="flex items-center justify-between px-5 pt-12 pb-4">
         <button onClick={() => navigate(-1)} className="rounded-full bg-card p-2">
           <ArrowLeft className="h-5 w-5 text-foreground" />
@@ -53,10 +61,13 @@ const RideTracking = () => {
       </div>
 
       <div className="px-5 space-y-4">
+        {/* Live map with route and driver position */}
         <MapPlaceholder showRoute driverLocation={status !== "searching"} />
         
+        {/* Progress bar showing current ride stage */}
         <RideStatusBar status={status} />
 
+        {/* Driver details and quick chat — hidden while still searching */}
         {status !== "searching" && (
           <>
             <DriverCard
@@ -73,6 +84,7 @@ const RideTracking = () => {
           </>
         )}
 
+        {/* Searching animation — pulsing car emoji */}
         {status === "searching" && (
           <motion.div
             animate={{ opacity: [0.5, 1, 0.5] }}
@@ -84,6 +96,7 @@ const RideTracking = () => {
           </motion.div>
         )}
 
+        {/* ETA card — shown during "arriving" and "in_ride" phases */}
         {(status === "arriving" || status === "in_ride") && (
           <motion.div
             initial={{ opacity: 0 }}

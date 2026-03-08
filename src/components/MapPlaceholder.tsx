@@ -6,13 +6,19 @@ interface MapPlaceholderProps {
   driverLocation?: boolean;
 }
 
+/**
+ * Map component that embeds a dark-themed Google Maps iframe of Jaipur.
+ * We use CSS filters to invert the default light map into a dark style
+ * since the Google Maps embed API doesn't support custom styling.
+ */
 const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
   return (
     <div className="relative w-full overflow-hidden rounded-2xl" style={{ paddingBottom: "28%" }}>
-      {/* Dark-themed Google Maps iframe embed of Jaipur */}
+      {/* Google Maps iframe — centered on Jaipur city */}
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113580.67323498857!2d75.71607645!3d26.885416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57e281%3A0xce1c63a0cf22e09!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
         className="absolute inset-0 h-full w-full border-0"
+        // CSS trick to make the map look dark — invert + hue rotate + desaturate
         style={{ filter: "invert(90%) hue-rotate(180deg) saturate(0.6) brightness(0.7) contrast(1.2)" }}
         allowFullScreen
         loading="lazy"
@@ -20,10 +26,10 @@ const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
         title="Jaipur Google Map"
       />
 
-      {/* Dark overlay for blending */}
+      {/* Semi-transparent overlay so the map blends with our dark theme */}
       <div className="pointer-events-none absolute inset-0 bg-background/30" />
 
-      {/* Animated route line */}
+      {/* Animated dashed route line between pickup and destination */}
       {showRoute && (
         <svg className="pointer-events-none absolute inset-0 h-full w-full">
           <motion.path
@@ -37,11 +43,10 @@ const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
             animate={{ pathLength: 1, opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           />
-          {/* Percentage-based path using viewBox */}
         </svg>
       )}
 
-      {/* Route path with viewBox for accurate percentage positioning */}
+      {/* More precise route using viewBox for percentage-based coordinates */}
       {showRoute && (
         <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <motion.path
@@ -55,7 +60,7 @@ const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
             animate={{ pathLength: 1, opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
           />
-          {/* Glow effect */}
+          {/* Glow effect behind the route for depth */}
           <motion.path
             d="M 25 35 C 32 28, 42 30, 50 38 S 65 52, 72 53"
             fill="none"
@@ -70,7 +75,7 @@ const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
         </svg>
       )}
 
-      {/* Pickup pin with pulse */}
+      {/* Pickup marker with a pulsing dot animation */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -86,7 +91,7 @@ const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
         </div>
       </motion.div>
 
-      {/* Destination pin */}
+      {/* Destination pin — drops in with a spring animation */}
       {showRoute && (
         <motion.div
           initial={{ y: -30, opacity: 0 }}
@@ -101,7 +106,7 @@ const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
         </motion.div>
       )}
 
-      {/* Driver car with smooth path animation */}
+      {/* Animated driver car icon — moves around slightly to simulate driving */}
       {driverLocation && (
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
@@ -126,7 +131,7 @@ const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
         </motion.div>
       )}
 
-      {/* Center/locate button */}
+      {/* Re-center map button in bottom-right corner */}
       <button className="absolute bottom-3 right-3 z-10 rounded-full bg-card/90 p-2 shadow-lg backdrop-blur-sm transition-colors hover:bg-secondary">
         <Navigation2 className="h-4 w-4 text-foreground" />
       </button>

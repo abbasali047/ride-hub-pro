@@ -5,12 +5,14 @@ import { ArrowLeft, Package, Scale, Ruler, Info, Clock, Zap } from "lucide-react
 import LocationInput from "@/components/LocationInput";
 import MapPlaceholder from "@/components/MapPlaceholder";
 
+// Package size tiers with weight limits and base prices in INR
 const packageSizes = [
   { label: "Small", desc: "Fits in a bag", icon: "📦", weight: "Up to 5 kg", price: "₹60" },
   { label: "Medium", desc: "Fits on a seat", icon: "📫", weight: "5–15 kg", price: "₹120" },
   { label: "Large", desc: "Fits in a trunk", icon: "🗃️", weight: "15–30 kg", price: "₹200" },
 ];
 
+// Delivery speed options — express adds ₹50 on top
 const deliveryTypes = [
   { label: "Standard", desc: "45–60 min", icon: <Clock className="h-4 w-4" />, price: "₹0" },
   { label: "Express", desc: "20–30 min", icon: <Zap className="h-4 w-4" />, price: "+₹50" },
@@ -25,15 +27,18 @@ const PackageDrop = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [instructions, setInstructions] = useState("");
 
+  // Reveal package options once user enters a drop-off location
   const handleDropoffChange = (val: string) => {
     setDropoff(val);
     if (val.length > 2) setShowOptions(true);
   };
 
+  // Calculate total price: base size price + express surcharge if applicable
   const basePrice = parseInt(packageSizes[selectedSize].price.replace("₹", ""));
   const expressExtra = selectedDelivery === 1 ? 50 : 0;
   const totalPrice = basePrice + expressExtra;
 
+  // Send user to ride tracking (same flow as cab booking for now)
   const handleBook = () => {
     navigate("/ride-tracking");
   };
@@ -52,8 +57,10 @@ const PackageDrop = () => {
       </div>
 
       <div className="px-5 space-y-4">
+        {/* Map with route preview */}
         <MapPlaceholder showRoute={showOptions} />
 
+        {/* Pickup and drop-off address fields */}
         <LocationInput
           pickup={pickup}
           destination={dropoff}
@@ -61,7 +68,7 @@ const PackageDrop = () => {
           onDestinationChange={handleDropoffChange}
         />
 
-        {/* Package Size */}
+        {/* Package configuration options — shown after drop-off is entered */}
         <AnimatePresence>
           {showOptions && (
             <motion.div
@@ -69,6 +76,7 @@ const PackageDrop = () => {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-4"
             >
+              {/* Size selection grid */}
               <div>
                 <h3 className="text-sm font-semibold text-foreground mb-2">Package size</h3>
                 <div className="grid grid-cols-3 gap-2">
@@ -91,7 +99,7 @@ const PackageDrop = () => {
                 </div>
               </div>
 
-              {/* Delivery Type */}
+              {/* Standard vs Express delivery toggle */}
               <div>
                 <h3 className="text-sm font-semibold text-foreground mb-2">Delivery speed</h3>
                 <div className="flex gap-2">
@@ -118,7 +126,7 @@ const PackageDrop = () => {
                 </div>
               </div>
 
-              {/* Special Instructions */}
+              {/* Optional special handling instructions */}
               <div>
                 <h3 className="text-sm font-semibold text-foreground mb-2">Special instructions</h3>
                 <textarea
@@ -130,7 +138,7 @@ const PackageDrop = () => {
                 />
               </div>
 
-              {/* Info banner */}
+              {/* Info banner about verified drivers and tracking */}
               <div className="flex items-start gap-3 rounded-xl bg-primary/10 p-3">
                 <Info className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                 <p className="text-[11px] text-muted-foreground">
@@ -142,7 +150,7 @@ const PackageDrop = () => {
           )}
         </AnimatePresence>
 
-        {/* Book button */}
+        {/* Confirm and send — total price calculated dynamically */}
         {showOptions && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
