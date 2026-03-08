@@ -1,12 +1,141 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Search, Clock, Star, MapPin, Calendar, ChevronRight, Car, Package, Utensils } from "lucide-react";
+import BottomNav from "@/components/BottomNav";
+
+const savedPlaces = [
+  { icon: "🏠", label: "Home", address: "123 Main Street" },
+  { icon: "💼", label: "Work", address: "456 Business Ave" },
+];
+
+const recentRides = [
+  { destination: "Airport Terminal 2", time: "Yesterday, 3:45 PM", price: "$32.50" },
+  { destination: "Downtown Mall", time: "Mar 5, 11:20 AM", price: "$14.75" },
+  { destination: "Central Park", time: "Mar 3, 9:00 AM", price: "$8.20" },
+];
+
+const services = [
+  { icon: <Car className="h-6 w-6" />, label: "Ride", color: "bg-primary/15 text-primary" },
+  { icon: <Package className="h-6 w-6" />, label: "Package", color: "bg-uber-green/15 text-uber-green" },
+  { icon: <Utensils className="h-6 w-6" />, label: "Eats", color: "bg-uber-yellow/15 text-uber-yellow" },
+  { icon: <Calendar className="h-6 w-6" />, label: "Reserve", color: "bg-uber-surge/15 text-uber-surge" },
+];
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background pb-20">
+      {/* Header */}
+      <div className="px-5 pt-12 pb-6">
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
+          <h1 className="text-2xl font-bold text-foreground">Good evening</h1>
+          <p className="text-sm text-muted-foreground">Where are you going?</p>
+        </motion.div>
       </div>
+
+      {/* Search bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="px-5 mb-6"
+      >
+        <button
+          onClick={() => navigate("/book")}
+          className="flex w-full items-center gap-3 rounded-xl bg-card p-4 transition-all hover:bg-secondary"
+        >
+          <Search className="h-5 w-5 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">Where to?</span>
+          <div className="ml-auto flex items-center gap-2 rounded-full bg-secondary px-3 py-1.5">
+            <Clock className="h-3.5 w-3.5 text-foreground" />
+            <span className="text-xs font-medium text-foreground">Now</span>
+          </div>
+        </button>
+      </motion.div>
+
+      {/* Services */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="px-5 mb-6"
+      >
+        <div className="grid grid-cols-4 gap-3">
+          {services.map((service) => (
+            <button
+              key={service.label}
+              onClick={() => service.label === "Ride" ? navigate("/book") : undefined}
+              className="flex flex-col items-center gap-2"
+            >
+              <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${service.color}`}>
+                {service.icon}
+              </div>
+              <span className="text-xs font-medium text-foreground">{service.label}</span>
+            </button>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Saved Places */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="px-5 mb-6"
+      >
+        <div className="rounded-xl bg-card">
+          {savedPlaces.map((place, i) => (
+            <button
+              key={place.label}
+              onClick={() => navigate("/book")}
+              className={`flex w-full items-center gap-3 p-4 transition-colors hover:bg-secondary ${
+                i < savedPlaces.length - 1 ? "border-b border-border" : ""
+              }`}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-lg">
+                {place.icon}
+              </div>
+              <div className="text-left">
+                <p className="text-sm font-medium text-foreground">{place.label}</p>
+                <p className="text-xs text-muted-foreground">{place.address}</p>
+              </div>
+              <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground" />
+            </button>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Recent Rides */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25 }}
+        className="px-5"
+      >
+        <h2 className="mb-3 text-lg font-bold text-foreground">Recent</h2>
+        <div className="space-y-2">
+          {recentRides.map((ride) => (
+            <button
+              key={ride.destination}
+              onClick={() => navigate("/book")}
+              className="flex w-full items-center gap-3 rounded-xl bg-card p-4 transition-colors hover:bg-secondary"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
+                <MapPin className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <div className="flex-1 text-left">
+                <p className="text-sm font-medium text-foreground">{ride.destination}</p>
+                <p className="text-xs text-muted-foreground">{ride.time}</p>
+              </div>
+              <span className="text-sm font-semibold text-foreground">{ride.price}</span>
+            </button>
+          ))}
+        </div>
+      </motion.div>
+
+      <BottomNav />
     </div>
   );
 };
