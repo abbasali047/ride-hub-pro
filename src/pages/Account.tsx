@@ -42,7 +42,7 @@ const Account = () => {
         >
           {[
             { value: "247", label: "Trips" },
-            { value: "$2,140", label: "Spent" },
+            { value: "₹18,400", label: "Spent" },
             { value: "12", label: "Rewards" },
           ].map((stat) => (
             <div key={stat.label} className="rounded-xl bg-card p-4 text-center">
