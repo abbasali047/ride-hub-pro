@@ -32,6 +32,7 @@ const App = () => (
           <Route path="/activity" element={<Activity />} />
           <Route path="/services" element={<Services />} />
           <Route path="/package" element={<PackageDrop />} />
+          <Route path="/eats" element={<Eats />} />
           <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
