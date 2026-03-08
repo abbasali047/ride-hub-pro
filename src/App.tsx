@@ -17,6 +17,7 @@ import Account from "./pages/Account";
 import PackageDrop from "./pages/PackageDrop";
 import Eats from "./pages/Eats";
 import Reserve from "./pages/Reserve";
+import Safety from "./pages/Safety";
 import NotFound from "./pages/NotFound";
 
 // Single query client instance for react-query caching
