@@ -68,7 +68,7 @@ const Index = () => {
           {services.map((service) => (
             <button
               key={service.label}
-              onClick={() => service.label === "Ride" ? navigate("/book") : undefined}
+              onClick={() => service.label === "Ride" ? navigate("/book") : service.label === "Package" ? navigate("/package") : undefined}
               className="flex flex-col items-center gap-2"
             >
               <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${service.color}`}>
