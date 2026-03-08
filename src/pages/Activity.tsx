@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, ChevronRight } from "lucide-react";
 import SideMenu from "@/components/SideMenu";
-import SideMenu from "@/components/SideMenu";
 
 const trips = [
   { id: 1, from: "Mansarovar", to: "Jaipur International Airport", date: "Mar 7, 2026", price: "₹450", status: "Completed" },

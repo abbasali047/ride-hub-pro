@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Car, Package, Utensils, Bike, Train, ShieldCheck, CalendarClock, Users } from "lucide-react";
 import SideMenu from "@/components/SideMenu";
-import SideMenu from "@/components/SideMenu";
 
 const allServices = [
   { icon: <Car className="h-7 w-7" />, label: "Ride", desc: "Get a ride in minutes", color: "bg-primary/15 text-primary" },

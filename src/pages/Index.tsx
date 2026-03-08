@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, Clock, Star, MapPin, Calendar, ChevronRight, Car, Package, Utensils } from "lucide-react";
 import SideMenu from "@/components/SideMenu";
-import SideMenu from "@/components/SideMenu";
 
 const savedPlaces = [
   { icon: "🏠", label: "Home", address: "Vaishali Nagar, Jaipur" },

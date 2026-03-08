@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { User, CreditCard, Shield, Bell, HelpCircle, LogOut, ChevronRight, Star } from "lucide-react";
 import SideMenu from "@/components/SideMenu";
-import SideMenu from "@/components/SideMenu";
 
 const menuItems = [
   { icon: <User className="h-5 w-5" />, label: "Edit Profile" },
