@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Car, Package, Utensils, Bike, Train, ShieldCheck, CalendarClock, Users } from "lucide-react";
 import SideMenu from "@/components/SideMenu";
@@ -12,8 +13,17 @@ const allServices = [
   { icon: <ShieldCheck className="h-7 w-7" />, label: "Safety", desc: "Emergency help", color: "bg-uber-surge/15 text-uber-surge" },
   { icon: <Users className="h-7 w-7" />, label: "Group Ride", desc: "Split fares", color: "bg-uber-yellow/15 text-uber-yellow" },
 ];
+// Route map for services that have dedicated pages
+const serviceRoutes: Record<string, string> = {
+  Ride: "/book",
+  Package: "/package",
+  Eats: "/eats",
+  Reserve: "/reserve",
+  Safety: "/safety",
+};
 
 const Services = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background pb-20">
       <SideMenu />
@@ -29,6 +39,7 @@ const Services = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
+            onClick={() => serviceRoutes[s.label] && navigate(serviceRoutes[s.label])}
             className="flex flex-col items-center gap-3 rounded-2xl bg-card p-6 transition-all hover:bg-secondary"
           >
             <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${s.color}`}>
