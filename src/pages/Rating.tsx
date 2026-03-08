@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star, DollarSign } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { getRandomDriver } from "@/data/drivers";
 
 const tips = [
   { label: "No tip", value: 0 },
@@ -15,6 +16,7 @@ const compliments = ["Great conversation", "Expert navigation", "Clean car", "Sm
 
 const Rating = () => {
   const navigate = useNavigate();
+  const driver = useMemo(() => getRandomDriver(), []);
   const { toast } = useToast();
   const [rating, setRating] = useState(0);
   const [hoveredStar, setHoveredStar] = useState(0);
@@ -45,10 +47,10 @@ const Rating = () => {
         {/* Driver info */}
         <div className="text-center">
           <div className="mx-auto mb-3 h-20 w-20 rounded-full bg-card flex items-center justify-center text-4xl">
-            👨‍✈️
+            {driver.avatar}
           </div>
           <h2 className="text-xl font-bold text-foreground">How was your trip?</h2>
-          <p className="text-sm text-muted-foreground">Michael Chen · Toyota Camry</p>
+          <p className="text-sm text-muted-foreground">{driver.name} · {driver.car}</p>
         </div>
 
         {/* Stars */}

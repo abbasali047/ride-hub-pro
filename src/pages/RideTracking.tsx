@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, X } from "lucide-react";
@@ -7,6 +7,7 @@ import RideStatusBar from "@/components/RideStatusBar";
 import DriverCard from "@/components/DriverCard";
 import QuickChat from "@/components/QuickChat";
 import { useToast } from "@/hooks/use-toast";
+import { getRandomDriver } from "@/data/drivers";
 
 type RideStatus = "searching" | "matched" | "arriving" | "in_ride" | "completed";
 
@@ -14,6 +15,7 @@ const RideTracking = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [status, setStatus] = useState<RideStatus>("searching");
+  const driver = useMemo(() => getRandomDriver(), []);
 
   useEffect(() => {
     const timers = [
@@ -58,13 +60,13 @@ const RideTracking = () => {
         {status !== "searching" && (
           <>
             <DriverCard
-              name="Michael Chen"
-              rating={4.92}
-              trips={3847}
-              car="Toyota Camry 2023"
-              plate="ABC 1234"
-              safetyScore={98}
-              avatar="👨‍✈️"
+              name={driver.name}
+              rating={driver.rating}
+              trips={driver.trips}
+              car={driver.car}
+              plate={driver.plate}
+              safetyScore={driver.safetyScore}
+              avatar={driver.avatar}
             />
 
             <QuickChat onSend={handleQuickMessage} />
