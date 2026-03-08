@@ -6,9 +6,9 @@ import { useToast } from "@/hooks/use-toast";
 
 const tips = [
   { label: "No tip", value: 0 },
-  { label: "$2", value: 2 },
-  { label: "$5", value: 5 },
-  { label: "$10", value: 10 },
+  { label: "₹20", value: 20 },
+  { label: "₹50", value: 50 },
+  { label: "₹100", value: 100 },
 ];
 
 const compliments = ["Great conversation", "Expert navigation", "Clean car", "Smooth ride", "Above & beyond"];
