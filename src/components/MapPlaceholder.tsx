@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, Navigation2 } from "lucide-react";
+import jaipurMap from "@/assets/jaipur-map.jpg";
 
 interface MapPlaceholderProps {
   showRoute?: boolean;
@@ -8,35 +9,21 @@ interface MapPlaceholderProps {
 
 const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
   return (
-    <div className="relative h-64 w-full overflow-hidden rounded-2xl bg-uber-surface">
-      {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-10">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={`h-${i}`}
-            className="absolute h-px w-full bg-foreground"
-            style={{ top: `${(i + 1) * 5}%` }}
-          />
-        ))}
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={`v-${i}`}
-            className="absolute w-px h-full bg-foreground"
-            style={{ left: `${(i + 1) * 5}%` }}
-          />
-        ))}
-      </div>
+    <div className="relative h-64 w-full overflow-hidden rounded-2xl">
+      {/* Jaipur map background */}
+      <img
+        src={jaipurMap}
+        alt="Jaipur city map"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
 
-      {/* Streets */}
-      <div className="absolute top-1/3 left-0 right-0 h-3 bg-uber-border/30" />
-      <div className="absolute top-0 bottom-0 left-1/4 w-3 bg-uber-border/30" />
-      <div className="absolute top-0 bottom-0 right-1/3 w-3 bg-uber-border/30" />
-      <div className="absolute bottom-1/4 left-0 right-0 h-2 bg-uber-border/20" />
+      {/* Overlay for contrast */}
+      <div className="absolute inset-0 bg-background/20" />
 
       {showRoute && (
         <motion.div
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           className="absolute top-1/3 left-1/4 h-0.5 w-[45%] bg-primary"
           style={{ transform: "rotate(-30deg)", transformOrigin: "left" }}
         />
