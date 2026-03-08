@@ -1,15 +1,17 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, DollarSign } from "lucide-react";
+import { Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getRandomDriver } from "@/data/drivers";
 
 const tips = [
   { label: "No tip", value: 0 },
+  { label: "₹10", value: 10 },
   { label: "₹20", value: 20 },
   { label: "₹50", value: 50 },
   { label: "₹100", value: 100 },
+  { label: "₹200", value: 200 },
 ];
 
 const compliments = ["Great conversation", "Expert navigation", "Clean car", "Smooth ride", "Above & beyond"];
@@ -101,18 +103,17 @@ const Rating = () => {
         {rating > 0 && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <h3 className="mb-3 text-sm font-semibold text-foreground text-center">Add a tip</h3>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {tips.map((tip) => (
                 <button
                   key={tip.value}
                   onClick={() => setSelectedTip(tip.value)}
-                  className={`flex items-center justify-center gap-1 rounded-xl py-3 text-sm font-medium transition-all ${
+                  className={`flex items-center justify-center rounded-xl py-3 text-sm font-medium transition-all ${
                     selectedTip === tip.value
                       ? "bg-uber-green/15 border border-uber-green/30 text-uber-green"
                       : "bg-card text-foreground border border-transparent"
                   }`}
                 >
-                  {tip.value > 0 && <DollarSign className="h-3 w-3" />}
                   {tip.label}
                 </button>
               ))}
