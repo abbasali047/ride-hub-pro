@@ -9,6 +9,7 @@ import RideTracking from "./pages/RideTracking";
 import Rating from "./pages/Rating";
 import Activity from "./pages/Activity";
 import Services from "./pages/Services";
+import Login from "./pages/Login";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +22,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Index />} />
           <Route path="/book" element={<BookRide />} />
           <Route path="/ride-tracking" element={<RideTracking />} />
