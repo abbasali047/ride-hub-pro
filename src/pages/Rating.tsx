@@ -5,6 +5,7 @@ import { Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getRandomDriver } from "@/data/drivers";
 
+// Tip amounts in Indian Rupees — "No tip" is always the first option
 const tips = [
   { label: "No tip", value: 0 },
   { label: "₹10", value: 10 },
@@ -14,10 +15,12 @@ const tips = [
   { label: "₹200", value: 200 },
 ];
 
+// Quick compliment tags the rider can give to the driver
 const compliments = ["Great conversation", "Expert navigation", "Clean car", "Smooth ride", "Above & beyond"];
 
 const Rating = () => {
   const navigate = useNavigate();
+  // Random driver — same approach as RideTracking, keeps it consistent
   const driver = useMemo(() => getRandomDriver(), []);
   const { toast } = useToast();
   const [rating, setRating] = useState(0);
@@ -25,12 +28,14 @@ const Rating = () => {
   const [selectedTip, setSelectedTip] = useState<number | null>(null);
   const [selectedCompliments, setSelectedCompliments] = useState<string[]>([]);
 
+  // Toggle a compliment on or off
   const toggleCompliment = (c: string) => {
     setSelectedCompliments((prev) =>
       prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]
     );
   };
 
+  // Submit the rating and go back home
   const handleSubmit = () => {
     toast({
       title: "Thanks for rating! ⭐",
@@ -46,7 +51,7 @@ const Rating = () => {
         animate={{ scale: 1, opacity: 1 }}
         className="w-full max-w-sm space-y-6"
       >
-        {/* Driver info */}
+        {/* Driver avatar and trip summary */}
         <div className="text-center">
           <div className="mx-auto mb-3 h-20 w-20 rounded-full bg-card flex items-center justify-center text-4xl">
             {driver.avatar}
@@ -55,7 +60,7 @@ const Rating = () => {
           <p className="text-sm text-muted-foreground">{driver.name} · {driver.car}</p>
         </div>
 
-        {/* Stars */}
+        {/* Star rating — 1 to 5, with hover preview */}
         <div className="flex justify-center gap-2">
           {[1, 2, 3, 4, 5].map((star) => (
             <motion.button
@@ -77,7 +82,7 @@ const Rating = () => {
           ))}
         </div>
 
-        {/* Compliments */}
+        {/* Compliment chips — only shown after a star is selected */}
         {rating > 0 && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <h3 className="mb-3 text-sm font-semibold text-foreground text-center">Compliments</h3>
@@ -99,7 +104,7 @@ const Rating = () => {
           </motion.div>
         )}
 
-        {/* Tip */}
+        {/* Tip selector grid — also appears after rating */}
         {rating > 0 && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <h3 className="mb-3 text-sm font-semibold text-foreground text-center">Add a tip</h3>
@@ -121,7 +126,7 @@ const Rating = () => {
           </motion.div>
         )}
 
-        {/* Submit */}
+        {/* Submit button — wraps everything up */}
         {rating > 0 && (
           <motion.button
             initial={{ opacity: 0 }}

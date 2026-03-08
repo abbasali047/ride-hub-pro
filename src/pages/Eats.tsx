@@ -3,8 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Star, Clock, Leaf, Drumstick, Search } from "lucide-react";
 
+// Filter type for veg/non-veg toggle
 type FilterType = "all" | "veg" | "nonveg";
 
+/**
+ * Restaurant data for Jaipur's most popular eateries.
+ * Curated list of famous veg and non-veg spots across the city.
+ * Prices are approximate for two people.
+ */
 const restaurants = [
   {
     name: "Laxmi Mishthan Bhandar (LMB)",
@@ -157,6 +163,8 @@ const Eats = () => {
   const [filter, setFilter] = useState<FilterType>("all");
   const [search, setSearch] = useState("");
 
+  // Filter restaurants based on selected category and search text
+  // Matches against name, cuisine type, and area
   const filtered = restaurants.filter((r) => {
     const matchesFilter = filter === "all" || r.type === filter;
     const matchesSearch =
@@ -167,12 +175,13 @@ const Eats = () => {
     return matchesFilter && matchesSearch;
   });
 
+  // Split into featured (popular carousel) and regular list
   const featured = filtered.filter((r) => r.featured);
   const others = filtered.filter((r) => !r.featured);
 
   return (
     <div className="min-h-screen bg-background pb-8">
-      {/* Header */}
+      {/* Page header with back button */}
       <div className="flex items-center gap-3 px-5 pt-12 pb-4">
         <button onClick={() => navigate(-1)} className="rounded-full bg-card p-2">
           <ArrowLeft className="h-5 w-5 text-foreground" />
@@ -181,7 +190,7 @@ const Eats = () => {
       </div>
 
       <div className="px-5 space-y-4">
-        {/* Search */}
+        {/* Search input — searches across restaurant name, cuisine, and area */}
         <div className="flex items-center gap-3 rounded-xl bg-card px-4 py-3">
           <Search className="h-4 w-4 text-muted-foreground" />
           <input
@@ -193,7 +202,7 @@ const Eats = () => {
           />
         </div>
 
-        {/* Filters */}
+        {/* Veg / Non-Veg filter pills */}
         <div className="flex gap-2">
           {[
             { key: "all" as FilterType, label: "All", icon: null },
@@ -219,7 +228,7 @@ const Eats = () => {
           ))}
         </div>
 
-        {/* Featured */}
+        {/* Horizontally scrollable "Popular in Jaipur" carousel */}
         {featured.length > 0 && (
           <div>
             <h2 className="text-sm font-semibold text-foreground mb-2">⭐ Popular in Jaipur</h2>
@@ -232,6 +241,7 @@ const Eats = () => {
                   transition={{ delay: i * 0.05 }}
                   className="min-w-[220px] rounded-2xl bg-card p-4 shrink-0"
                 >
+                  {/* Restaurant icon + name */}
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-3xl">{r.image}</span>
                     <div className="flex-1 min-w-0">
@@ -239,6 +249,7 @@ const Eats = () => {
                       <p className="text-[10px] text-muted-foreground">{r.area}</p>
                     </div>
                   </div>
+                  {/* Rating, delivery time, and veg/non-veg badge */}
                   <div className="flex items-center gap-2 mb-2">
                     <div className="flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5">
                       <Star className="h-3 w-3 text-primary fill-primary" />
@@ -251,6 +262,7 @@ const Eats = () => {
                       {r.type === "veg" ? "VEG" : "NON-VEG"}
                     </div>
                   </div>
+                  {/* Popular dishes for this restaurant */}
                   <p className="text-[10px] text-muted-foreground truncate">🔥 {r.popular}</p>
                   <div className="mt-2 flex items-center justify-between">
                     <span className="text-xs font-semibold text-foreground">{r.price}</span>
@@ -264,7 +276,7 @@ const Eats = () => {
           </div>
         )}
 
-        {/* All Restaurants */}
+        {/* Full restaurant listing below the carousel */}
         <div>
           <h2 className="text-sm font-semibold text-foreground mb-2">
             {featured.length > 0 ? "All Restaurants" : "Restaurants"}
@@ -282,6 +294,7 @@ const Eats = () => {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-semibold text-foreground truncate">{r.name}</p>
+                    {/* Small colored dot to indicate veg (green) or non-veg (red) */}
                     <div className={`shrink-0 h-2.5 w-2.5 rounded-full border ${
                       r.type === "veg" ? "border-green-500 bg-green-500" : "border-red-500 bg-red-500"
                     }`} />
@@ -289,6 +302,7 @@ const Eats = () => {
                   <p className="text-[11px] text-muted-foreground">{r.cuisine} · {r.area}</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">🔥 {r.popular}</p>
                 </div>
+                {/* Right side: rating, ETA, and price */}
                 <div className="text-right shrink-0">
                   <div className="flex items-center gap-1 mb-1">
                     <Star className="h-3 w-3 text-primary fill-primary" />
@@ -302,6 +316,7 @@ const Eats = () => {
           </div>
         </div>
 
+        {/* Empty state when no restaurants match the search/filter */}
         {filtered.length === 0 && (
           <div className="text-center py-10">
             <p className="text-muted-foreground text-sm">No restaurants found</p>

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 
+// Pre-written messages for quick communication with the driver
+// Saves time vs typing, especially on bumpy rides lol
 const quickMessages = [
   "I'm on my way!",
   "I'm at the pickup point",
@@ -12,6 +14,10 @@ interface QuickChatProps {
   onSend: (message: string) => void;
 }
 
+/**
+ * Quick message bubbles for rider-driver communication.
+ * Tapping a bubble sends it instantly (no typing needed).
+ */
 const QuickChat = ({ onSend }: QuickChatProps) => {
   return (
     <div className="rounded-xl bg-card p-4">

@@ -1,8 +1,11 @@
+// Main app entry point — sets up routing, providers, and global UI (toasts)
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Page imports
 import Index from "./pages/Index";
 import BookRide from "./pages/BookRide";
 import RideTracking from "./pages/RideTracking";
@@ -15,11 +18,13 @@ import PackageDrop from "./pages/PackageDrop";
 import Eats from "./pages/Eats";
 import NotFound from "./pages/NotFound";
 
+// Single query client instance for react-query caching
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      {/* Two toast systems: shadcn toaster + sonner for different use cases */}
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -34,6 +39,7 @@ const App = () => (
           <Route path="/package" element={<PackageDrop />} />
           <Route path="/eats" element={<Eats />} />
           <Route path="/account" element={<Account />} />
+          {/* Catch-all for undefined routes */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

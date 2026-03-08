@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+// Ride mood preferences — driver can see these before pickup
 const moods = [
   { emoji: "🤫", label: "Quiet ride", value: "quiet" },
   { emoji: "💬", label: "Chat OK", value: "chat" },
@@ -12,6 +13,10 @@ interface MoodSelectorProps {
   onSelect: (value: string) => void;
 }
 
+/**
+ * Lets the rider set a "mood" for the trip — quiet, chatty, music, or AC preference.
+ * Selected mood is highlighted with a primary color ring.
+ */
 const MoodSelector = ({ selected, onSelect }: MoodSelectorProps) => {
   return (
     <div className="rounded-xl bg-card p-4">
