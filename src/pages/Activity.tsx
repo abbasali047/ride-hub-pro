@@ -3,11 +3,11 @@ import { MapPin, ChevronRight } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
 
 const trips = [
-  { id: 1, from: "Home", to: "Airport Terminal 2", date: "Mar 7, 2026", price: "$32.50", status: "Completed" },
-  { id: 2, from: "Downtown Mall", to: "Home", date: "Mar 5, 2026", price: "$14.75", status: "Completed" },
-  { id: 3, from: "Central Park", to: "Office", date: "Mar 3, 2026", price: "$8.20", status: "Completed" },
-  { id: 4, from: "Home", to: "Gym", date: "Mar 1, 2026", price: "$6.50", status: "Cancelled" },
-  { id: 5, from: "Restaurant", to: "Home", date: "Feb 28, 2026", price: "$11.00", status: "Completed" },
+  { id: 1, from: "Mansarovar", to: "Jaipur International Airport", date: "Mar 7, 2026", price: "₹450", status: "Completed" },
+  { id: 2, from: "Hawa Mahal", to: "Vaishali Nagar", date: "Mar 5, 2026", price: "₹180", status: "Completed" },
+  { id: 3, from: "Amer Fort", to: "C-Scheme", date: "Mar 3, 2026", price: "₹280", status: "Completed" },
+  { id: 4, from: "Vaishali Nagar", to: "Nahargarh Fort", date: "Mar 1, 2026", price: "₹150", status: "Cancelled" },
+  { id: 5, from: "World Trade Park", to: "Mansarovar", date: "Feb 28, 2026", price: "₹95", status: "Completed" },
 ];
 
 const Activity = () => {

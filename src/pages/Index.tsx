@@ -5,14 +5,15 @@ import { Search, Clock, Star, MapPin, Calendar, ChevronRight, Car, Package, Uten
 import BottomNav from "@/components/BottomNav";
 
 const savedPlaces = [
-  { icon: "🏠", label: "Home", address: "123 Main Street" },
-  { icon: "💼", label: "Work", address: "456 Business Ave" },
+  { icon: "🏠", label: "Home", address: "Vaishali Nagar, Jaipur" },
+  { icon: "💼", label: "Work", address: "Malviya Nagar, Jaipur" },
 ];
 
 const recentRides = [
-  { destination: "Airport Terminal 2", time: "Yesterday, 3:45 PM", price: "$32.50" },
-  { destination: "Downtown Mall", time: "Mar 5, 11:20 AM", price: "$14.75" },
-  { destination: "Central Park", time: "Mar 3, 9:00 AM", price: "$8.20" },
+  { destination: "Jaipur International Airport", time: "Yesterday, 3:45 PM", price: "₹450" },
+  { destination: "Hawa Mahal", time: "Mar 5, 11:20 AM", price: "₹120" },
+  { destination: "Amer Fort", time: "Mar 3, 9:00 AM", price: "₹280" },
+  { destination: "World Trade Park", time: "Mar 1, 6:30 PM", price: "₹95" },
 ];
 
 const services = [
