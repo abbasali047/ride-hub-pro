@@ -11,6 +11,7 @@ import Activity from "./pages/Activity";
 import Services from "./pages/Services";
 import Login from "./pages/Login";
 import Account from "./pages/Account";
+import PackageDrop from "./pages/PackageDrop";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/rating" element={<Rating />} />
           <Route path="/activity" element={<Activity />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/package" element={<PackageDrop />} />
           <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
