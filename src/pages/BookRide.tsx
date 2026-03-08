@@ -8,10 +8,10 @@ import VehicleCard from "@/components/VehicleCard";
 import MoodSelector from "@/components/MoodSelector";
 
 const vehicles = [
-  { name: "UberX", description: "Affordable everyday rides", price: "$12.50", eta: "3 min", capacity: 4, icon: "🚗", surge: false },
-  { name: "Comfort", description: "Newer cars, extra legroom", price: "$18.75", eta: "5 min", capacity: 4, icon: "🚙", surge: false },
-  { name: "UberXL", description: "Affordable rides for groups", price: "$22.00", eta: "8 min", capacity: 6, icon: "🚐", surge: true },
-  { name: "Black", description: "Premium rides in luxury cars", price: "$35.00", eta: "6 min", capacity: 4, icon: "🖤", surge: false },
+  { name: "UberX", description: "Affordable everyday rides", price: "₹120", eta: "3 min", capacity: 4, icon: "🚗", surge: false },
+  { name: "Comfort", description: "Newer cars, extra legroom", price: "₹185", eta: "5 min", capacity: 4, icon: "🚙", surge: false },
+  { name: "UberXL", description: "Affordable rides for groups", price: "₹250", eta: "8 min", capacity: 6, icon: "🚐", surge: true },
+  { name: "Black", description: "Premium rides in luxury cars", price: "₹450", eta: "6 min", capacity: 4, icon: "🖤", surge: false },
 ];
 
 const BookRide = () => {
