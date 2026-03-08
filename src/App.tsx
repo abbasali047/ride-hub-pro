@@ -18,6 +18,7 @@ import PackageDrop from "./pages/PackageDrop";
 import Eats from "./pages/Eats";
 import Reserve from "./pages/Reserve";
 import Safety from "./pages/Safety";
+import HelpSupport from "./pages/HelpSupport";
 import NotFound from "./pages/NotFound";
 
 // Single query client instance for react-query caching
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/eats" element={<Eats />} />
           <Route path="/reserve" element={<Reserve />} />
           <Route path="/safety" element={<Safety />} />
+          <Route path="/help" element={<HelpSupport />} />
           <Route path="/account" element={<Account />} />
           {/* Catch-all for undefined routes */}
           <Route path="*" element={<NotFound />} />
