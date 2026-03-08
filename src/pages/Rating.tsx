@@ -30,7 +30,7 @@ const Rating = () => {
   const handleSubmit = () => {
     toast({
       title: "Thanks for rating! ⭐",
-      description: `You rated ${rating} stars${selectedTip ? ` with a $${selectedTip} tip` : ""}`,
+      description: `You rated ${rating} stars${selectedTip ? ` with a ₹${selectedTip} tip` : ""}`,
     });
     navigate("/");
   };
