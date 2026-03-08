@@ -11,6 +11,7 @@ import Activity from "./pages/Activity";
 import Services from "./pages/Services";
 import Login from "./pages/Login";
 import Account from "./pages/Account";
+import PackageDrop from "./pages/PackageDrop";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
