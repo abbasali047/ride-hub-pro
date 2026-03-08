@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { User, CreditCard, Shield, Bell, HelpCircle, LogOut, ChevronRight, Star } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
+import SideMenu from "@/components/SideMenu";
 
 const menuItems = [
   { icon: <User className="h-5 w-5" />, label: "Edit Profile" },
@@ -14,7 +15,8 @@ const menuItems = [
 const Account = () => {
   return (
     <div className="min-h-screen bg-background pb-20">
-      <div className="px-5 pt-12 pb-6">
+      <SideMenu />
+      <div className="px-5 pt-12 pb-6 pl-16">
         {/* Profile header */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}

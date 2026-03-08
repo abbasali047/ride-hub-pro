@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Car, Package, Utensils, Bike, Train, ShieldCheck, CalendarClock, Users } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
+import SideMenu from "@/components/SideMenu";
 
 const allServices = [
   { icon: <Car className="h-7 w-7" />, label: "Ride", desc: "Get a ride in minutes", color: "bg-primary/15 text-primary" },
@@ -16,7 +17,8 @@ const allServices = [
 const Services = () => {
   return (
     <div className="min-h-screen bg-background pb-20">
-      <div className="px-5 pt-12 pb-6">
+      <SideMenu />
+      <div className="px-5 pt-12 pb-6 pl-16">
         <h1 className="text-2xl font-bold text-foreground">Services</h1>
         <p className="text-sm text-muted-foreground">Explore what's available</p>
       </div>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, Clock, Star, MapPin, Calendar, ChevronRight, Car, Package, Utensils } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
+import SideMenu from "@/components/SideMenu";
 
 const savedPlaces = [
   { icon: "🏠", label: "Home", address: "Vaishali Nagar, Jaipur" },
@@ -28,8 +29,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background pb-20">
+      <SideMenu />
       {/* Header */}
-      <div className="px-5 pt-12 pb-6">
+      <div className="px-5 pt-12 pb-6 pl-16">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-2xl font-bold text-foreground">Good evening</h1>
           <p className="text-sm text-muted-foreground">Where are you going?</p>
