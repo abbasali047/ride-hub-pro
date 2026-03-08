@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, DollarSign } from "lucide-react";
+import { Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getRandomDriver } from "@/data/drivers";
 
