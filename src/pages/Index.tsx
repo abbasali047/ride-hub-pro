@@ -29,8 +29,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background pb-20">
+      <SideMenu />
       {/* Header */}
-      <div className="px-5 pt-12 pb-6">
+      <div className="px-5 pt-12 pb-6 pl-16">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-2xl font-bold text-foreground">Good evening</h1>
           <p className="text-sm text-muted-foreground">Where are you going?</p>
