@@ -16,6 +16,7 @@ const compliments = ["Great conversation", "Expert navigation", "Clean car", "Sm
 
 const Rating = () => {
   const navigate = useNavigate();
+  const driver = useMemo(() => getRandomDriver(), []);
   const { toast } = useToast();
   const [rating, setRating] = useState(0);
   const [hoveredStar, setHoveredStar] = useState(0);
