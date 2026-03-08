@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { User, CreditCard, Shield, Bell, HelpCircle, LogOut, ChevronRight, Star } from "lucide-react";
-import BottomNav from "@/components/BottomNav";
 import SideMenu from "@/components/SideMenu";
 
 const menuItems = [
@@ -85,7 +84,7 @@ const Account = () => {
         </motion.button>
       </div>
 
-      <BottomNav />
+      
     </div>
   );
 };

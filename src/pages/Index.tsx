@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, Clock, Star, MapPin, Calendar, ChevronRight, Car, Package, Utensils } from "lucide-react";
-import BottomNav from "@/components/BottomNav";
 import SideMenu from "@/components/SideMenu";
 
 const savedPlaces = [
@@ -138,7 +137,7 @@ const Index = () => {
         </div>
       </motion.div>
 
-      <BottomNav />
+      
     </div>
   );
 };
