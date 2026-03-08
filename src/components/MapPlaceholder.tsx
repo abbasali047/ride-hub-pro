@@ -8,7 +8,7 @@ interface MapPlaceholderProps {
 
 const MapPlaceholder = ({ showRoute, driverLocation }: MapPlaceholderProps) => {
   return (
-    <div className="relative w-full overflow-hidden rounded-2xl" style={{ paddingBottom: "56.25%" }}>
+    <div className="relative w-full overflow-hidden rounded-2xl" style={{ paddingBottom: "28%" }}>
       {/* Dark-themed Google Maps iframe embed of Jaipur */}
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113580.67323498857!2d75.71607645!3d26.885416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57e281%3A0xce1c63a0cf22e09!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
