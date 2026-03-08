@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, ChevronRight } from "lucide-react";
-import BottomNav from "@/components/BottomNav";
+import SideMenu from "@/components/SideMenu";
 import SideMenu from "@/components/SideMenu";
 
 const trips = [
