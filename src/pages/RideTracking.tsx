@@ -60,13 +60,13 @@ const RideTracking = () => {
         {status !== "searching" && (
           <>
             <DriverCard
-              name="Michael Chen"
-              rating={4.92}
-              trips={3847}
-              car="Toyota Camry 2023"
-              plate="ABC 1234"
-              safetyScore={98}
-              avatar="👨‍✈️"
+              name={driver.name}
+              rating={driver.rating}
+              trips={driver.trips}
+              car={driver.car}
+              plate={driver.plate}
+              safetyScore={driver.safetyScore}
+              avatar={driver.avatar}
             />
 
             <QuickChat onSend={handleQuickMessage} />

@@ -47,10 +47,10 @@ const Rating = () => {
         {/* Driver info */}
         <div className="text-center">
           <div className="mx-auto mb-3 h-20 w-20 rounded-full bg-card flex items-center justify-center text-4xl">
-            👨‍✈️
+            {driver.avatar}
           </div>
           <h2 className="text-xl font-bold text-foreground">How was your trip?</h2>
-          <p className="text-sm text-muted-foreground">Michael Chen · Toyota Camry</p>
+          <p className="text-sm text-muted-foreground">{driver.name} · {driver.car}</p>
         </div>
 
         {/* Stars */}
