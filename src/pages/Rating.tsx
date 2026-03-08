@@ -103,18 +103,17 @@ const Rating = () => {
         {rating > 0 && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <h3 className="mb-3 text-sm font-semibold text-foreground text-center">Add a tip</h3>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {tips.map((tip) => (
                 <button
                   key={tip.value}
                   onClick={() => setSelectedTip(tip.value)}
-                  className={`flex items-center justify-center gap-1 rounded-xl py-3 text-sm font-medium transition-all ${
+                  className={`flex items-center justify-center rounded-xl py-3 text-sm font-medium transition-all ${
                     selectedTip === tip.value
                       ? "bg-uber-green/15 border border-uber-green/30 text-uber-green"
                       : "bg-card text-foreground border border-transparent"
                   }`}
                 >
-                  {tip.value > 0 && <DollarSign className="h-3 w-3" />}
                   {tip.label}
                 </button>
               ))}
