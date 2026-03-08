@@ -7,9 +7,11 @@ import { getRandomDriver } from "@/data/drivers";
 
 const tips = [
   { label: "No tip", value: 0 },
+  { label: "₹10", value: 10 },
   { label: "₹20", value: 20 },
   { label: "₹50", value: 50 },
   { label: "₹100", value: 100 },
+  { label: "₹200", value: 200 },
 ];
 
 const compliments = ["Great conversation", "Expert navigation", "Clean car", "Smooth ride", "Above & beyond"];
