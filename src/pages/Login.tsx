@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Phone, Mail, ArrowRight } from "lucide-react";
+import { Eye, EyeOff, Phone, Mail, ArrowRight, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,15 +17,45 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    if (method === "phone" && !otpSent) {
-      setOtpSent(true);
-      toast({ title: "OTP Sent! 📱", description: "A verification code has been sent to your phone." });
-      return;
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      if (method === "phone") {
+        const fullPhone = `+91${phone.replace(/\D/g, "")}`;
+        if (!otpSent) {
+          const { error } = await supabase.auth.signInWithOtp({ phone: fullPhone });
+          if (error) throw error;
+          setOtpSent(true);
+          toast({ title: "OTP Sent! 📱", description: "A verification code has been sent to your phone." });
+        } else {
+          const { error } = await supabase.auth.verifyOtp({ phone: fullPhone, token: otp, type: "sms" });
+          if (error) throw error;
+          toast({ title: "Welcome! 🎉", description: "Logged in successfully" });
+          navigate("/");
+        }
+      } else {
+        if (isLogin) {
+          const { error } = await supabase.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+          toast({ title: "Welcome back! 🎉", description: "Logged in successfully" });
+          navigate("/");
+        } else {
+          const { error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { emailRedirectTo: window.location.origin },
+          });
+          if (error) throw error;
+          toast({ title: "Account created! 🎉", description: "Check your email to verify your account." });
+        }
+      }
+    } catch (error: any) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    toast({ title: "Welcome! 🎉", description: isLogin ? "Logged in successfully" : "Account created successfully" });
-    navigate("/");
   };
 
   return (
@@ -86,8 +117,8 @@ const Login = () => {
         </div>
 
         <div className="space-y-3">
-          {/* Name (signup only) */}
-          {!isLogin && (
+          {/* Name (signup only, email method) */}
+          {!isLogin && method === "email" && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}>
               <input
                 type="text"
@@ -162,21 +193,46 @@ const Login = () => {
 
         {/* Forgot password */}
         {isLogin && method === "email" && (
-          <button className="mt-2 text-xs font-medium text-primary">Forgot password?</button>
+          <button
+            onClick={async () => {
+              if (!email) {
+                toast({ title: "Enter your email first", variant: "destructive" });
+                return;
+              }
+              const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: `${window.location.origin}/reset-password`,
+              });
+              if (error) {
+                toast({ title: "Error", description: error.message, variant: "destructive" });
+              } else {
+                toast({ title: "Check your email 📧", description: "Password reset link sent." });
+              }
+            }}
+            className="mt-2 text-xs font-medium text-primary"
+          >
+            Forgot password?
+          </button>
         )}
 
         {/* Submit */}
         <motion.button
           whileTap={{ scale: 0.98 }}
           onClick={handleSubmit}
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-foreground py-4 text-base font-bold text-background"
+          disabled={loading}
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-foreground py-4 text-base font-bold text-background disabled:opacity-50"
         >
-          {method === "phone" && !otpSent
-            ? "Send OTP"
-            : isLogin
-            ? "Log in"
-            : "Create account"}
-          <ArrowRight className="h-4 w-4" />
+          {loading ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : (
+            <>
+              {method === "phone" && !otpSent
+                ? "Send OTP"
+                : isLogin
+                ? "Log in"
+                : "Create account"}
+              <ArrowRight className="h-4 w-4" />
+            </>
+          )}
         </motion.button>
 
         {/* Divider */}
@@ -188,10 +244,26 @@ const Login = () => {
 
         {/* Social login */}
         <div className="flex gap-3">
-          <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-secondary py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-uber-surface">
+          <button
+            onClick={async () => {
+              await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: { redirectTo: window.location.origin },
+              });
+            }}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-secondary py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+          >
             <span className="text-lg">🔵</span> Google
           </button>
-          <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-secondary py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-uber-surface">
+          <button
+            onClick={async () => {
+              await supabase.auth.signInWithOAuth({
+                provider: "apple",
+                options: { redirectTo: window.location.origin },
+              });
+            }}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-secondary py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+          >
             <span className="text-lg">🍎</span> Apple
           </button>
         </div>
