@@ -319,7 +319,7 @@ const HelpSupport = () => {
             </div>
             <div className="flex-1 text-left">
               <p className="text-sm font-semibold text-foreground">Email Us</p>
-              <p className="text-[11px] text-muted-foreground">support@ridex.in · Reply in 24 hrs</p>
+              <p className="text-[11px] text-muted-foreground">support@uber.com · Reply in 24 hrs</p>
             </div>
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </button>
