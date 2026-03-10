@@ -133,7 +133,7 @@ const HelpSupport = () => {
         ? "Connecting you to support at 1800-XXX-XXXX..."
         : method === "Chat"
           ? "Starting live chat with a support agent..."
-          : "Opening email form for support@ridex.in...",
+          : "Opening email form for support@uber.com...",
     });
   };
 
