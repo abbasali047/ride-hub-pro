@@ -329,7 +329,7 @@ const HelpSupport = () => {
       {/* App version footer — helpful for bug reports */}
       <div className="px-5 pb-8">
         <p className="text-[10px] text-muted-foreground text-center">
-          RideX v1.0 · Need urgent help? Call 1800-XXX-XXXX
+          Uber v1.0 · Need urgent help? Call 1800-XXX-XXXX
         </p>
       </div>
     </div>

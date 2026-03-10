@@ -73,7 +73,7 @@ const Login = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="flex-1 rounded-t-3xl bg-card px-6 pt-8 pb-10"
+        className="flex-1 rounded-t-3xl bg-card px-6 pt-6 pb-8"
       >
         {/* Toggle login/signup */}
         <div className="mb-6 flex rounded-xl bg-secondary p-1">
