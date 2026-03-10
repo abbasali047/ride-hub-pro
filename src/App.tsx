@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 // Page imports
 import Index from "./pages/Index";
@@ -27,27 +29,27 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      {/* Two toast systems: shadcn toaster + sonner for different use cases */}
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Index />} />
-          <Route path="/book" element={<BookRide />} />
-          <Route path="/ride-tracking" element={<RideTracking />} />
-          <Route path="/rating" element={<Rating />} />
-          <Route path="/activity" element={<Activity />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/package" element={<PackageDrop />} />
-          <Route path="/eats" element={<Eats />} />
-          <Route path="/reserve" element={<Reserve />} />
-          <Route path="/safety" element={<Safety />} />
-          <Route path="/help" element={<HelpSupport />} />
-          <Route path="/account" element={<Account />} />
-          {/* Catch-all for undefined routes */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+            <Route path="/book" element={<ProtectedRoute><BookRide /></ProtectedRoute>} />
+            <Route path="/ride-tracking" element={<ProtectedRoute><RideTracking /></ProtectedRoute>} />
+            <Route path="/rating" element={<ProtectedRoute><Rating /></ProtectedRoute>} />
+            <Route path="/activity" element={<ProtectedRoute><Activity /></ProtectedRoute>} />
+            <Route path="/services" element={<ProtectedRoute><Services /></ProtectedRoute>} />
+            <Route path="/package" element={<ProtectedRoute><PackageDrop /></ProtectedRoute>} />
+            <Route path="/eats" element={<ProtectedRoute><Eats /></ProtectedRoute>} />
+            <Route path="/reserve" element={<ProtectedRoute><Reserve /></ProtectedRoute>} />
+            <Route path="/safety" element={<ProtectedRoute><Safety /></ProtectedRoute>} />
+            <Route path="/help" element={<ProtectedRoute><HelpSupport /></ProtectedRoute>} />
+            <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
