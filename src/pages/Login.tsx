@@ -63,9 +63,8 @@ const Login = () => {
       {/* Hero */}
       <div className="relative px-6 pt-16 pb-10">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
-          <div className="text-5xl mb-4">🚗</div>
-          <h1 className="text-3xl font-black text-foreground tracking-tight">RideX</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Move freely through Jaipur</p>
+          <h1 className="text-4xl font-black text-foreground tracking-tight">Uber</h1>
+          <p className="mt-2 text-base text-muted-foreground">Move freely through Jaipur</p>
         </motion.div>
       </div>
 
