@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Hero */}
-      <div className="relative px-6 pt-16 pb-10">
+      <div className="relative px-6 pt-14 pb-8">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-4xl font-black text-foreground tracking-tight">Uber</h1>
           <p className="mt-2 text-base text-muted-foreground">Move freely through Jaipur</p>
