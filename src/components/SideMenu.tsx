@@ -107,7 +107,7 @@ const SideMenu = () => {
 
             {/* App version footer */}
             <div className="px-5 py-4 border-t border-border">
-              <p className="text-[10px] text-muted-foreground text-center">RideX v1.0 · Jaipur, India 🇮🇳</p>
+              <p className="text-[10px] text-muted-foreground text-center">Uber v1.0 · Jaipur, India 🇮🇳</p>
             </div>
           </motion.div>
         )}

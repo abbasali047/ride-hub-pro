@@ -133,7 +133,7 @@ const HelpSupport = () => {
         ? "Connecting you to support at 1800-XXX-XXXX..."
         : method === "Chat"
           ? "Starting live chat with a support agent..."
-          : "Opening email form for support@ridex.in...",
+          : "Opening email form for support@uber.com...",
     });
   };
 
@@ -319,7 +319,7 @@ const HelpSupport = () => {
             </div>
             <div className="flex-1 text-left">
               <p className="text-sm font-semibold text-foreground">Email Us</p>
-              <p className="text-[11px] text-muted-foreground">support@ridex.in · Reply in 24 hrs</p>
+              <p className="text-[11px] text-muted-foreground">support@uber.com · Reply in 24 hrs</p>
             </div>
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </button>
@@ -329,7 +329,7 @@ const HelpSupport = () => {
       {/* App version footer — helpful for bug reports */}
       <div className="px-5 pb-8">
         <p className="text-[10px] text-muted-foreground text-center">
-          RideX v1.0 · Need urgent help? Call 1800-XXX-XXXX
+          Uber v1.0 · Need urgent help? Call 1800-XXX-XXXX
         </p>
       </div>
     </div>

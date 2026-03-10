@@ -14,7 +14,7 @@ const emergencyContacts = [
   { icon: PhoneCall, label: "Police", number: "100", color: "bg-destructive/15 text-destructive" },
   { icon: Phone, label: "Ambulance", number: "108", color: "bg-uber-green/15 text-uber-green" },
   { icon: AlertTriangle, label: "Women Helpline", number: "1091", color: "bg-uber-surge/15 text-uber-surge" },
-  { icon: Phone, label: "RideX Support", number: "1800-XXX-XXXX", color: "bg-primary/15 text-primary" },
+  { icon: Phone, label: "Uber Support", number: "1800-XXX-XXXX", color: "bg-primary/15 text-primary" },
 ];
 
 // Safety features that users can toggle or activate
